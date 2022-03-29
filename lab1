@@ -1,0 +1,29 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var x = new Class1();
+            x.OnKeyPressed += (send, button) => Console.WriteLine("\nYou have pressed the key =  " + button);
+            x.Run();
+        }
+    }
+     internal class Class1
+    {
+        public event EventHandler<char> OnKeyPressed;  
+        public void Run()
+        {               
+            var i = Console.ReadKey().KeyChar;
+            while ((char.ToLower(i) != 'c') & (char.ToLower(i) != 'с'))
+            {
+                OnKeyPressed?.Invoke(this, i);
+                i = Console.ReadKey().KeyChar;
+            }
+            Console.WriteLine("\nFinish");
+        
+    }
+
+}
